@@ -44,9 +44,16 @@ _load_env_file(BASE_DIR / '.env')
 SECRET_KEY = 'django-insecure-rmv*hkm0m(ol-6wd0$@a_uwam#=_9*or_s-k)cmyb=uk&tv+yz'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.getenv('DEBUG', 'True').lower() in {'1', 'true', 'yes', 'on'}
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    host.strip()
+    for host in os.getenv(
+        'ALLOWED_HOSTS',
+        'localhost,127.0.0.1,danobong.pythonanywhere.com',
+    ).split(',')
+    if host.strip()
+]
 
 
 # Application definition
