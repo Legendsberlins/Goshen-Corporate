@@ -1,0 +1,102 @@
+﻿<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Goshen Giant Group - Careers{% endblock %}</title>
+    <link rel="icon" type="image/jpeg" href="{% static 'images/goshen_logo.jpg' %}" sizes="any">
+    <link rel="apple-touch-icon" href="{% static 'images/goshen_logo.jpg' %}">
+    <meta name="theme-color" content="#109107">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+{% block extra_css %}{% endblock %}
+</head>
+<body>
+    <!-- Header & Navigation -->
+    <header>
+        <nav class="navbar navbar-expand-lg">
+            <div class="container-lg">
+                <a class="navbar-brand" href="/">
+                    <img src="{% static 'images/goshen_logo.jpg' %}" alt="Goshen Giant Group logo" class="nav-logo">
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item"><a class="nav-link" href="{% url 'about' %}">About</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'careers' %}#companies">Companies</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'careers' %}#why-work">Why Join Us</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'careers' %}#jobs">Open Roles</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'careers' %}#apply">Apply</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        {% if messages %}
+            <div class="container-lg mt-3">
+                {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                        {{ message }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="container-lg">
+                <div class="social-links">
+                    <span class="social-label">Follow us:</span>
+                    <a href="https://www.instagram.com/naturisgiant" aria-label="Visit our Instagram page" target="_blank" rel="noopener noreferrer"><i class="bi bi-instagram social-icon" aria-hidden="true"></i> Instagram</a>
+                    <a href="https://www.facebook.com/NaturisGiantFoods" aria-label="Visit our Facebook page" target="_blank" rel="noopener noreferrer"><i class="bi bi-facebook social-icon" aria-hidden="true"></i> Facebook</a>
+                    <a href="https://wa.me/2347057025093" aria-label="Contact us on WhatsApp" target="_blank" rel="noopener noreferrer"><i class="bi bi-whatsapp social-icon" aria-hidden="true"></i> WhatsApp</a>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <div class="footer-left">
+                    <p class="copy">&copy; 2026 Goshen Giant Food Limited. All rights reserved.</p>
+                    <p class="slogan">Naturis Giant - Authentic African Foods</p>
+                </div>
+
+                <div class="footer-right">
+                    <nav class="footer-quicklinks" aria-label="Footer navigation">
+                        <a href="{% url 'home' %}">Home</a>
+                        <a href="{% url 'about' %}">About</a>
+                        <a href="{% url 'about' %}#faqs">FAQ</a>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+    </script>
+    {% block extra_js %}{% endblock %}
+</body>
+</html>
+

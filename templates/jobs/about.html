@@ -1,0 +1,139 @@
+{% extends 'base.html' %}
+
+{% block title %}About - Goshen Giant Group{% endblock %}
+
+{% block content %}
+<section class="about-page-section">
+    <div class="container-lg">
+        <div class="about-hero">
+            <h2>About Goshen</h2>
+            <p class="lead">Goshen Giant Food Limited is a proudly Nigerian-owned agro-industrial company committed to the production, processing, and distribution of premium-quality African food and beverage products for both local and international markets. Strategically located in Uyo, Akwa Ibom State, we specialize in the value-added processing of carbonated soft drinks and water, African flours & grains, vegetable leaves and pods, staples and thickeners, seafoods, edible oils and fat,  under the trusted Naturis Giant brand.</p>
+        </div>
+
+        <div class="about-grid">
+            <article class="about-block">
+                <h3>Our Facilities</h3>
+                <p>We operate modern processing facilities in Uyo, combining traditional recipes with modern food-safety standards to deliver consistent, high-quality products.</p>
+            </article>
+
+            <article class="about-block">
+                <h3>Quality &amp; Packaging</h3>
+                <p>Our packaging preserves freshness and ensures products are export-compliant. We focus on traceability, safety, and sustainable sourcing.</p>
+            </article>
+
+            <article class="about-block">
+                <h3>Distribution Reach</h3>
+                <p>We distribute locally across Nigeria and export to North America, Europe and West Africa through trusted partners and logistics channels.</p>
+            </article>
+        </div>
+
+        <section class="about-rich">
+            <h3><i class="bi bi-bullseye heading-icon" aria-hidden="true"></i>Our Mission</h3>
+            <p>To produce high-quality, safe, and culturally relevant food products that nourish families, support farmers, and strengthen African food value chains locally and globally.</p>
+
+            <h3><i class="bi bi-star heading-icon" aria-hidden="true"></i>Our Core Values</h3>
+            <ol>
+                <li><strong>Integrity</strong> - We conduct business with honesty, fairness, and transparency at all levels.</li>
+                <li><strong>Quality</strong> - We adhere strictly to national and international food safety standards (NAFDAC, FDA, ISO, HACCP).</li>
+                <li><strong>Innovation</strong> - We embrace modern technology and research to improve food processing and packaging.</li>
+                <li><strong>Sustainability</strong> - We promote environmentally friendly and socially responsible practices.</li>
+                <li><strong>Community Impact</strong> - We empower rural farmers and create employment through inclusive value chains.</li>
+                <li><strong>Excellence</strong> - We are committed to delivering consistent value across every product line.</li>
+            </ol>
+
+            <h3><i class="bi bi-person-badge heading-icon" aria-hidden="true"></i>Our Leadership</h3>
+            <p><strong>Chief Godwin Afangideh, Chairman and CEO</strong>- a visionary entrepreneur, educator, and seasoned public servant with decades of experience in transport and logistics, real estate, and agriculture. He has provided strategic leadership in policy formulation, institutional oversight, and sector development across the agricultural sector in Nigeria.</p>
+
+            <h3><i class="bi bi-patch-check heading-icon" aria-hidden="true"></i>Quality Assurance</h3>
+            <p>At Goshen Giant Food Limited, food safety and product quality are at the heart of everything we do. We operate a strict Quality Management System (QMS) aligned with NAFDAC, FDA, ISO 22000, and HACCP standards to ensure our products are consistently safe, nutritious, and of premium quality.</p>
+            <p><em>Our Commitment Includes:</em></p>
+            <ul>
+                <li>Ensuring the delivery of safe, high-quality products that meet global standards.</li>
+                <li>Driving efficiency and growth through technology and best practices.</li>
+                <li>Promoting responsible and environmentally sustainable operations.</li>
+                <li>Delivering consistent value while exceeding customer expectations.</li>
+                <li>Upholding the highest standards of ethics and transparent governance.</li>
+                <li>Building a skilled, safe, and empowered workforce.</li>
+                <li>Supporting food security and economic growth.</li>
+            </ul>
+
+            <h3><i class="bi bi-globe2 heading-icon" aria-hidden="true"></i>Export &amp; Distribution</h3>
+            <p>Goshen Giant Food Limited is proud to share the taste of Africa with the world. Our products are exported to select regions across North America, Europe, and West Africa, with a strong focus on African diaspora communities seeking authentic, high-quality foods.</p>
+            <p><em>What We Offer:</em></p>
+            <ul>
+                <li>Export-compliant packaging and labeling (FDA, EU, CFIA, FSA-approved formats)</li>
+                <li>Bulk and retail supply for international distributors</li>
+                <li>Fast-moving inventory with competitive pricing</li>
+                <li>B2B support for ethnic stores, wholesalers, and foodservice</li>
+                <li>Reliable logistics through certified freight forwarders</li>
+            </ul>
+            <p>Interested in distributing our products? <a href="{% url 'careers' %}#apply">contact us</a> for more details.</p>
+        </section>
+
+        <!-- Call-to-Action: Back to Careers -->
+        <div class="careers-cta-section">
+            <div class="cta-card">
+                <h3><i class="bi bi-briefcase heading-icon" aria-hidden="true"></i>Ready to Join Our Team?</h3>
+                <p>Explore open positions and apply to become part of the Goshen Giant Food Limited family.</p>
+                <a href="{% url 'careers' %}" class="btn btn-primary btn-lg">
+                    <i class="bi bi-arrow-right"></i> Back to Careers
+                </a>
+            </div>
+        </div>
+
+        <div class="about-faqs" id="faqs">
+            <h4><i class="bi bi-question-circle heading-icon" aria-hidden="true"></i>Frequently Asked Questions</h4>
+            <div class="faq-list">
+                <div class="faq-item">
+                    <h5 class="faq-q">Do you deliver nationwide in Nigeria?</h5>
+                    <p class="faq-a">Yes, we deliver to all 36 states via reliable courier services.</p>
+                </div>
+                <div class="faq-item">
+                    <h5 class="faq-q">Do you ship internationally?</h5>
+                    <p class="faq-a">Yes, selected products ship to the US, Canada, UK and EU. Costs are calculated at checkout.</p>
+                </div>
+                <div class="faq-item">
+                    <h5 class="faq-q">How long does delivery take?</h5>
+                    <p class="faq-a">Local: 2-5 business days. International: 7-14 business days depending on destination.</p>
+                </div>
+                <div class="faq-item">
+                    <h5 class="faq-q">How can I track my order?</h5>
+                    <p class="faq-a">Once your order is shipped, a tracking number and link will be sent to your email and SMS.</p>
+                </div>
+                <div class="faq-item">
+                    <h5 class="faq-q">What payment methods do you accept?</h5>
+                    <p class="faq-a">We accept Bank Transfer, Flutterwave, and Stripe for international orders.</p>
+                </div>
+                <div class="faq-item">
+                    <h5 class="faq-q">Is my payment secure?</h5>
+                    <p class="faq-a">Absolutely. All payments are processed through secure, encrypted gateways compliant with international data protection standards.</p>
+                </div>
+                <div class="faq-item">
+                    <h5 class="faq-q">Can I return a product?</h5>
+                    <p class="faq-a">Yes, you can return unopened, undamaged products within 7 days of delivery. Contact our support team first to initiate a return.</p>
+                </div>
+                <div class="faq-item">
+                    <h5 class="faq-q">Do you offer refunds?</h5>
+                    <p class="faq-a">Yes, refunds are processed within 5-7 business days after the returned item is received and inspected.</p>
+                </div>
+                <div class="faq-item">
+                    <h5 class="faq-q">What if I receive a wrong or damaged item?</h5>
+                    <p class="faq-a">Please contact us immediately via email or WhatsApp with your order number and a photo of the item.</p>
+                </div>
+                <div class="faq-item">
+                    <h5 class="faq-q">Can I buy in bulk or wholesale?</h5>
+                    <p class="faq-a">Yes, we offer wholesale pricing for distributors and retailers. Contact us directly for partnership details.</p>
+                </div>
+                <div class="faq-item">
+                    <h5 class="faq-q">Are your products NAFDAC-approved?</h5>
+                    <p class="faq-a">Yes, all our food products are NAFDAC-certified, and those intended for export meet FDA, CFIA, and EU regulatory standards.</p>
+                </div>
+                <div class="faq-item">
+                    <h5 class="faq-q">Are your products safe for people with food allergies?</h5>
+                    <p class="faq-a">We provide allergen information on all labels. Please read labels carefully or contact us for specific concerns.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

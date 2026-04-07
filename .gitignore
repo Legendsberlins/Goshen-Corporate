@@ -1,0 +1,25 @@
+# Environment and secrets
+.env
+venv/Scripts/.env
+
+# Python caches
+__pycache__/
+*.py[cod]
+
+# Virtual environments
+venv/
+.venv/
+env/
+
+# Local database and logs
+db.sqlite3
+*.log
+
+# User uploads
+resumes/
+media/
+
+# OS/editor
+.DS_Store
+Thumbs.db
+.vscode/

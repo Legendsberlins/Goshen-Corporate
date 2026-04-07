@@ -1,0 +1,219 @@
+{% extends 'base.html' %}
+
+{% block title %}Careers - Goshen Giant Group{% endblock %}
+
+{% block content %}
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container-lg">
+            <h1>Join the Future of Food & Industry</h1>
+            <p>We are building a world-class African enterprise<br>across food production, logistics, and innovation.</p>
+            <div class="hero-buttons">
+                <a href="#jobs" class="btn btn-primary">
+                    <i class="bi bi-briefcase"></i> View Open Roles
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about-section" id="about">
+        <div class="container-lg">
+            <h2 class="section-title">About Goshen Giant Group</h2>
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="about-content">
+                        <p style="font-size: 1.1rem; line-height: 1.8;">
+                            Goshen Giant Group is a diversified company with operations in food and beverage manufacturing, aquaculture & agro-allied services, logistics, and analytical laboratory services. We are committed to building sustainable systems that drive economic growth across Nigeria and West Africa.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Companies Section -->
+    <section id="companies">
+        <div class="container-lg">
+            <h2 class="section-title">Our Companies</h2>
+            <div class="companies-grid">
+                <div class="company-card">
+                    <h3>Goshen Giant Foods Limited</h3>
+                    <p>Goshen Giant Foods Limited delivers high-quality food and beverage products that meet global standards.</p>
+                </div>
+
+                <div class="company-card">
+                    <h3>Agro Global Logistics Limited</h3>
+                    <p>Agro Global Logistics Limited delivers reliable logistics and supply chain solutions.</p>
+                </div>
+
+                <div class="company-card">
+                    <h3>Goshen Giant Integrated Farms</h3>
+                    <p>Goshen Giant Integrated Farms Limited delivers sustainable aquaculture, agricultural, and animal feed production solutions</p>
+                </div>
+
+                <div class="company-card">
+                    <h3>Naturius Labs Laboratory services Limited</h3>
+                    <p>Naturis Analytical Laboratory Services Limited delivers reliable analytical testing, quality assurance, and environmental consultancy services</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Work With Us Section -->
+    <section class="why-work-section" id="why-work">
+        <div class="container-lg">
+            <h2 class="section-title">Why Join Us</h2>
+            <div class="benefits-grid">
+                <div class="benefit-item">
+                    <i class="bi bi-hammer"></i>
+                    <h4>Build from the Ground Up</h4>
+                    <p>Work on cutting-edge projects that shape the future of African industry</p>
+                </div>
+                <div class="benefit-item">
+                    <i class="bi bi-lightning-charge-fill"></i>
+                    <h4>Direct Impact</h4>
+                    <p>Your work directly influences company growth and strategy</p>
+                </div>
+                <div class="benefit-item">
+                    <i class="bi bi-graph-up"></i>
+                    <h4>Rapid Growth</h4>
+                    <p>Exceptional opportunities for career advancement and skill development</p>
+                </div>
+                <div class="benefit-item">
+                    <i class="bi bi-heart"></i>
+                    <h4>Purpose-Driven</h4>
+                    <p>Work in an environment focused on sustainability and positive impact</p>
+                </div>
+                <div class="benefit-item">
+                    <i class="bi bi-globe"></i>
+                    <h4>Africa's Future</h4>
+                    <p>Be part of building Africa's industrial and agricultural capability</p>
+                </div>
+                <div class="benefit-item">
+                    <i class="bi bi-people"></i>
+                    <h4>Great Culture</h4>
+                    <p>Join a collaborative team that values innovation and ownership</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Work Environment Section -->
+    <section class="culture-section">
+        <div class="container-lg">
+            <h2 class="section-title">Our Work Environment</h2>
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="culture-content">
+                        <p style="font-size: 1.1rem; line-height: 1.8; margin-bottom: 1.5rem;">
+                            At Goshen Giant Group Limited, we promote a professional, safe, and collaborative work environment driven by innovation, accountability, and continuous improvement. We uphold high health, safety, and hygiene standards, ensuring compliance with global best practices while empowering our teams to deliver quality, productivity, and sustainable growth.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Open Roles Section -->
+    <section class="jobs-section" id="jobs">
+        <div class="container-lg">
+            <h2 class="section-title">
+                <i class="bi bi-briefcase"></i> Open Roles
+            </h2>
+            <p class="section-subtitle">
+                {% if total_jobs == 1 %}
+                    1 position available
+                {% elif total_jobs > 0 %}
+                    {{ total_jobs }} positions available
+                {% else %}
+                    No open positions at the moment
+                {% endif %}
+            </p>
+
+            <div class="jobs-container">
+                {% for job in jobs %}
+                    <div class="job-card">
+                        <h3>{{ job.title }}</h3>
+                        <div class="job-meta">
+                            <div class="job-meta-item">
+                                <i class="bi bi-geo-alt"></i>
+                                <span><strong>Location:</strong> {{ job.get_location_display }}</span>
+                            </div>
+                            <div class="job-meta-item">
+                                <i class="bi bi-clock"></i>
+                                <span><strong>Type:</strong> {{ job.get_job_type_display }}</span>
+                            </div>
+                        </div>
+                        <p>{{ job.description|truncatewords:30 }}</p>
+                        <div class="job-card-buttons">
+                            <a href="{{ job.join_com_url }}" class="btn-learn-more" target="_blank" rel="noopener noreferrer">
+                                <i class="bi bi-eye"></i> View Details
+                            </a>
+                        </div>
+                    </div>
+                {% empty %}
+                    <div style="text-align: center; padding: 2rem; color: #6b7280;">
+                        <i class="bi bi-inbox" style="font-size: 3rem; display: block; margin-bottom: 1rem;"></i>
+                        <p>No open positions at the moment. Please check back soon!</p>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    <!-- Hiring Process Section -->
+    <section style="background: var(--accent-light);">
+        <div class="container-lg">
+            <h2 class="section-title">Our Hiring Process</h2>
+            <div class="hiring-process">
+                <div class="process-step">
+                    <div class="process-step-number">1</div>
+                    <h4 class="process-step-title">Submit Application</h4>
+                    <p>Fill out and send your application</p>
+                </div>
+                <div style="display: flex; align-items: center; justify-content: center; color: var(--secondary-color);">
+                    <i class="bi bi-arrow-right" style="font-size: 2rem;"></i>
+                </div>
+                <div class="process-step">
+                    <div class="process-step-number">2</div>
+                    <h4 class="process-step-title">Initial Screening</h4>
+                    <p>We review your qualifications</p>
+                </div>
+                <div style="display: flex; align-items: center; justify-content: center; color: var(--secondary-color);">
+                    <i class="bi bi-arrow-right" style="font-size: 2rem;"></i>
+                </div>
+                <div class="process-step">
+                    <div class="process-step-number">3</div>
+                    <h4 class="process-step-title">Interview</h4>
+                    <p>1–2 stages with our team</p>
+                </div>
+                <div style="display: flex; align-items: center; justify-content: center; color: var(--secondary-color);">
+                    <i class="bi bi-arrow-right" style="font-size: 2rem;"></i>
+                </div>
+                <div class="process-step">
+                    <div class="process-step-number">4</div>
+                    <h4 class="process-step-title">Final Selection</h4>
+                    <p>Offer & onboarding</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- General Application Section -->
+    <section class="general-app-section" id="apply">
+        <div class="container-lg">
+            <h2 class="section-title">
+                <i class="bi bi-star"></i> Didn't See a Role That Fits?
+            </h2>
+            <p class="section-subtitle">
+                We're always looking for great talent. Submit a general application and join our talent pool.
+            </p>
+            <div style="text-align: center; margin-top: 2rem;">
+                <a href="{% url 'general_application' %}" class="btn btn-primary" style="display: inline-block;">
+                    <i class="bi bi-upload"></i> Submit General Application
+                </a>
+            </div>
+        </div>
+    </section>
+{% endblock %}
