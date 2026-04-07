@@ -61,7 +61,7 @@
 
         .nav-brand-text {
             margin-top: 0.1rem;
-            font-family: 'Trebuchet MS', 'Segoe UI', Tahoma, Arial, sans-serif;
+            font-family: Cambria, Georgia, 'Times New Roman', Times, serif;
             font-size: clamp(0.76rem, 1.02vw, 0.95rem);
             font-weight: 900;
             line-height: 1;
