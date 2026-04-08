@@ -9,6 +9,12 @@ from .models import Job, Company, GeneralApplication
 
 logger = logging.getLogger(__name__)
 
+CONTACT_INFO = {
+    'address': 'Plot 48, Itam Industrial Layout, Uyo, Akwa Ibom State, Nigeria',
+    'email': 'inquiry@goshengiantfoods.com',
+    'phone': '+234 705 702 5093',
+}
+
 
 def careers(request):
     """Main careers page with all sections"""
@@ -26,6 +32,38 @@ def careers(request):
 def about(request):
     """About page for Goshen Giant Food Limited."""
     return render(request, 'jobs/about.html')
+
+
+@require_http_methods(["GET", "POST"])
+def contact(request):
+    """Contact page with company details and inquiry form."""
+    if request.method == 'POST':
+        name = request.POST.get('name', '').strip()
+        email = request.POST.get('email', '').strip()
+        subject = request.POST.get('subject', '').strip()
+        message = request.POST.get('message', '').strip()
+
+        if not name or not email or not message:
+            messages.error(request, 'Please fill in your name, email, and message.')
+            return render(request, 'jobs/contact.html', {'contact_info': CONTACT_INFO})
+
+        mail = EmailMessage(
+            subject=subject or f'Contact inquiry from {name}',
+            body=(
+                f'Name: {name}\n'
+                f'Email: {email}\n'
+                f'Subject: {subject or "General Inquiry"}\n\n'
+                f'Message:\n{message}\n'
+            ),
+            from_email=settings.DEFAULT_FROM_EMAIL,
+            to=[settings.GENERAL_APPLICATION_RECIPIENT],
+            reply_to=[email],
+        )
+        mail.send(fail_silently=False)
+        messages.success(request, "Thanks — your message has been received. We'll get back to you shortly.")
+        return redirect('contact')
+
+    return render(request, 'jobs/contact.html', {'contact_info': CONTACT_INFO})
 
 
 def job_detail(request, pk):

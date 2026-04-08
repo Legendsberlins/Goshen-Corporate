@@ -22,6 +22,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', jobs_views.careers, name='home'),
     path('about/', jobs_views.about, name='about'),
+    path('contact/', jobs_views.contact, name='contact'),
     path('careers/', jobs_views.careers, name='careers'),
     path('careers/jobs/<int:pk>/', jobs_views.job_detail, name='job_detail'),
     path('careers/apply/general/', jobs_views.general_application, name='general_application'),
