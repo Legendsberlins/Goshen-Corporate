@@ -66,3 +66,17 @@ class GeneralApplication(models.Model):
     def __str__(self):
         position = self.position_applied or (self.job.title if self.job else 'General Application')
         return f"{self.first_name} {self.last_name} - {position}"
+
+
+class ContactMessage(models.Model):
+    name = models.CharField(max_length=150)
+    email = models.EmailField()
+    subject = models.CharField(max_length=255, blank=True)
+    message = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['-created_at']
+
+    def __str__(self):
+        return f"{self.name} - {self.subject or 'No Subject'}"

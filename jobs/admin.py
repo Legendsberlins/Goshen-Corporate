@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Job, Company, GeneralApplication
+from .models import Job, Company, GeneralApplication, ContactMessage
 
 
 @admin.register(Company)
@@ -25,4 +25,14 @@ class GeneralApplicationAdmin(admin.ModelAdmin):
     search_fields = ('first_name', 'last_name', 'email', 'position_applied')
     readonly_fields = ('created_at',)
     fields = ('job', 'position_applied', 'first_name', 'last_name', 'email', 'phone', 'experience_years', 'skills', 'cover_letter', 'resume', 'created_at')
+    ordering = ('-created_at',)
+
+
+@admin.register(ContactMessage)
+class ContactMessageAdmin(admin.ModelAdmin):
+    list_display = ('name', 'email', 'subject', 'created_at')
+    list_filter = ('created_at',)
+    search_fields = ('name', 'email', 'subject', 'message')
+    readonly_fields = ('created_at',)
+    fields = ('name', 'email', 'subject', 'message', 'created_at')
     ordering = ('-created_at',)
