@@ -1,0 +1,513 @@
+{% extends 'base.html' %}
+
+{% block title %}Naturis Analytical Laboratory Services Ltd{% endblock %}
+
+{% block extra_css %}
+<style>
+.naturis-page{--naturis-forest:#1A3D2B;--naturis-sage:#3D6B53;--naturis-moss:#6A9E7A;--naturis-lime:#B8D9A0;--naturis-cream:#F5F0E8;--naturis-sand:#E8E0D0;--naturis-amber:#C8A040;--naturis-white:#FAFAF7;--naturis-ink:#0D1A12;--naturis-gradient:linear-gradient(135deg,var(--naturis-forest),var(--naturis-sage))}
+.naturis-page .lab-hero{background:var(--naturis-gradient);color:white;padding:5.5rem 0 4.5rem;position:relative;overflow:hidden}
+.naturis-page .lab-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 78% 38%,rgba(255,255,255,.08),transparent 28%),radial-gradient(circle at 20% 72%,rgba(184,217,160,.08),transparent 26%);pointer-events:none}
+.lab-hero .container-lg{position:relative;z-index:1}
+.lab-hero .row{min-height:540px}
+.lab-hero h1{font-family:'DM Serif Display',serif;font-size:clamp(3rem,6vw,5.4rem);line-height:0.95;letter-spacing:-0.03em;max-width:7ch;margin-bottom:1rem}
+.naturis-page .lab-hero h1 em{font-style:italic;color:var(--naturis-lime)}
+.hero-kicker{display:inline-block;font-size:0.72rem;letter-spacing:0.26em;text-transform:uppercase;color:rgba(255,255,255,0.72);margin-bottom:1.15rem}
+.hero-lead{max-width:520px;font-size:1rem;line-height:1.75;color:rgba(255,255,255,0.82);margin-bottom:1.85rem}
+.hero-stats{display:flex;gap:2rem;flex-wrap:wrap;align-items:flex-start;margin-top:2rem}
+.hero-stat{min-width:92px}
+.hero-stat-value{font-family:'DM Serif Display',serif;font-size:2rem;line-height:1;color:white;margin-bottom:0.35rem}
+.hero-stat-label{font-size:0.68rem;letter-spacing:0.22em;text-transform:uppercase;color:rgba(255,255,255,0.58)}
+.hero-badge{display:inline-flex;align-items:center;justify-content:center;min-width:118px;padding:0.7rem 1rem;border:1px solid rgba(255,255,255,0.2);border-radius:6px;background:rgba(255,255,255,0.04);font-family:'DM Serif Display',serif;font-size:0.82rem;letter-spacing:0.12em;text-transform:uppercase;color:white}
+@media (max-width:991px){.naturis-page .lab-hero .row{min-height:auto}.naturis-page .lab-hero{padding:4.5rem 0 4rem}.naturis-page .hero-lead{max-width:none}.naturis-page .hero-stats{gap:1.25rem}.naturis-page .hero-badge{margin-top:1rem}}
+@media (max-width:768px){.naturis-page .lab-hero{padding:4rem 0 3.5rem}.naturis-page .lab-hero h1{font-size:2.5rem;margin-bottom:0.85rem}.naturis-page .hero-kicker{font-size:0.65rem;margin-bottom:1rem}.naturis-page .hero-lead{font-size:0.92rem;line-height:1.65;margin-bottom:1.5rem}.naturis-page .hero-stats{gap:1.5rem;margin-top:1.5rem}.naturis-page .hero-stat-value{font-size:1.6rem}.naturis-page .hero-stat-label{font-size:0.62rem}.naturis-page .hero-badge{min-width:110px;padding:0.6rem 0.9rem;font-size:0.75rem}}
+@media (max-width:640px){.naturis-page .lab-hero{padding:3.5rem 0 3rem}.naturis-page .lab-hero .container-lg{padding:0 1rem}.naturis-page .lab-hero h1{font-size:2rem;max-width:8ch;margin-bottom:0.75rem}.naturis-page .hero-kicker{font-size:0.6rem;margin-bottom:0.9rem}.naturis-page .hero-lead{font-size:0.86rem;line-height:1.6;margin-bottom:1.25rem}.naturis-page .hero-stats{gap:1rem;margin-top:1.25rem}.naturis-page .hero-stat{min-width:80px}.naturis-page .hero-stat-value{font-size:1.4rem;margin-bottom:0.25rem}.naturis-page .hero-stat-label{font-size:0.56rem}.naturis-page .hero-badge{min-width:100px;padding:0.5rem 0.8rem;font-size:0.68rem}}
+@media (max-width:480px){.naturis-page .lab-hero{padding:3rem 0 2.5rem}.naturis-page .lab-hero h1{font-size:1.6rem;line-height:1.1}.naturis-page .hero-lead{font-size:0.8rem;margin-bottom:1rem}.naturis-page .hero-stats{flex-direction:column;gap:0.8rem}.naturis-page .hero-stat{min-width:70px}.naturis-page .hero-stat-value{font-size:1.2rem}.naturis-page .hero-badge{width:100%;text-align:center}}
+.naturis-page .lab-section{padding:80px 0}
+.naturis-page .lab-section#about{background:var(--naturis-cream)}
+@media (max-width:768px){.naturis-page .lab-section{padding:60px 0}}
+@media (max-width:640px){.naturis-page .lab-section{padding:50px 0}}
+@media (max-width:480px){.naturis-page .lab-section{padding:40px 0}}
+.naturis-page .lab-section#about .container-lg{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(340px,0.85fr);gap:2.5rem;align-items:center}
+.about-text{max-width:640px}
+.naturis-page .about-text .section-tag{margin-bottom:0.85rem;color:var(--naturis-sage);font-weight:700;letter-spacing:0.16em;text-transform:uppercase;font-size:0.82rem}
+.naturis-page .about-text h2{font-family:'DM Serif Display',serif;font-size:clamp(2.2rem,4vw,3.8rem);line-height:0.98;color:var(--naturis-forest);margin-bottom:1.25rem}
+.naturis-page .about-text p{font-size:1rem;line-height:1.85;color:var(--naturis-ink);margin-bottom:1.1rem;max-width:58ch}
+.naturis-page .highlight{border-left:3px solid var(--naturis-sage);padding:0.2rem 0 0.2rem 1rem;margin:1.25rem 0 1.1rem;font-family:'DM Serif Display',serif;font-size:1.05rem;line-height:1.7;color:var(--naturis-forest);font-weight:700;max-width:620px}
+.about-visual{width:100%}
+@media (max-width:991px){.naturis-page .lab-section#about .container-lg{grid-template-columns:1fr;gap:2rem}.naturis-page .about-text{max-width:none}.naturis-page .about-visual{max-width:600px;margin:0 auto}}
+@media (max-width:768px){.naturis-page .lab-section#about{padding:60px 0}.naturis-page .about-text .section-tag{font-size:0.76rem;margin-bottom:0.7rem}.naturis-page .about-text h2{font-size:2rem;margin-bottom:1rem}.naturis-page .about-text p{font-size:0.92rem;line-height:1.75;margin-bottom:1rem}.naturis-page .highlight{font-size:0.96rem;padding:0.2rem 0 0.2rem 0.9rem;margin:1rem 0 0.9rem;border-left-width:2px}}
+@media (max-width:640px){.naturis-page .about-text .section-tag{font-size:0.7rem}.naturis-page .about-text h2{font-size:1.6rem;line-height:1.1}.naturis-page .about-text p{font-size:0.88rem}.naturis-page .highlight{font-size:0.88rem;padding:0.15rem 0 0.15rem 0.75rem}}
+@media (max-width:480px){.naturis-page .lab-section#about{padding:50px 0}.naturis-page .about-visual{max-width:100%}}
+.naturis-page .services-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:1rem;margin-top:2rem}
+.naturis-page .lab-section#services{background:var(--naturis-white)}
+.naturis-page .lab-section#services .section-title{font-family:'DM Serif Display',serif;font-size:clamp(2.1rem,3.4vw,3.1rem);text-align:left;margin-bottom:0.8rem;color:var(--naturis-forest)}
+.naturis-page .services-intro{max-width:620px;color:var(--naturis-ink);line-height:1.7;margin-bottom:2rem}
+.naturis-page .service-card{background:var(--naturis-sand);padding:1.35rem 1.2rem 1.4rem;border-radius:14px;box-shadow:0 4px 12px rgba(26,61,43,0.08);transition:transform 0.25s ease, box-shadow 0.25s ease;text-decoration:none;color:var(--naturis-forest);min-height:290px;display:flex;flex-direction:column}
+.naturis-page .service-card:hover{transform:translateY(-4px);box-shadow:0 12px 26px rgba(26,61,43,0.16);text-decoration:none}
+.naturis-page .svc-num{font-size:0.72rem;letter-spacing:0.18em;text-transform:uppercase;color:rgba(26,61,43,0.55);margin-bottom:1rem}
+.naturis-page .svc-icon{width:48px;height:48px;display:flex;align-items:center;justify-content:center;background:rgba(26,61,43,0.06);border-radius:8px;margin-bottom:1.1rem;border:none}
+.naturis-page .svc-icon i{font-size:1.35rem;color:var(--naturis-forest);font-weight:600}
+.svc-icon i,.standard-icon i,.hse-item i{font-family:'bootstrap-icons' !important;font-style:normal;font-weight:400;line-height:1;display:inline-block}
+.icon-svg{width:1.25em;height:1.25em;display:inline-block;vertical-align:middle;fill:currentColor}
+.naturis-page .service-card h5{font-family:'DM Serif Display',serif;font-size:1.08rem;line-height:1.15;color:var(--naturis-forest);margin:0 0 0.9rem}
+.naturis-page .service-points{list-style:none;padding:0;margin:0;display:flex;flex-direction:column}
+.naturis-page .service-points li{padding:0.62rem 0;border-top:1px solid rgba(26,61,43,0.12);font-size:0.86rem;line-height:1.45;color:var(--naturis-forest);opacity:0.82}
+.service-points li:first-child{border-top:none}
+.naturis-page .info-card{background:var(--naturis-forest);color:var(--naturis-white);padding:2rem 1.75rem;border-radius:6px;box-shadow:0 8px 24px rgba(0,0,0,0.12);border:1px solid rgba(255,255,255,0.08)}
+.naturis-page .info-row{display:flex;justify-content:space-between;gap:1.5rem;padding:1rem 0;border-bottom:1px solid rgba(255,255,255,0.12)}
+.info-row:last-child{border-bottom:none}
+.naturis-page .info-key{font-size:0.72rem;letter-spacing:0.18em;text-transform:uppercase;color:rgba(250,250,247,0.72);min-width:110px}
+.naturis-page .info-val{font-size:0.92rem;line-height:1.6;color:var(--naturis-white);text-align:right;max-width:260px}
+@media (max-width:900px){.naturis-page .services-grid{grid-template-columns:repeat(3,1fr)}.naturis-page .lab-hero h1{font-size:32px}}
+@media (max-width:768px){.naturis-page .services-grid{grid-template-columns:repeat(2,1fr)}.naturis-page .lab-section#services .section-title{font-size:2rem}.naturis-page .service-card{padding:1.1rem 1rem;min-height:240px}.naturis-page .service-card h5{font-size:0.98rem}.naturis-page .svc-icon{width:40px;height:40px}.naturis-page .service-points li{font-size:0.8rem}}
+@media (max-width:640px){.naturis-page .services-grid{grid-template-columns:1fr}.naturis-page .lab-section#services{padding:60px 0}.naturis-page .lab-hero{padding:4rem 0 3rem}.naturis-page .lab-hero h1{font-size:2.2rem}.naturis-page .service-card{padding:1rem;min-height:220px}.naturis-page .service-card h5{font-size:0.92rem}.naturis-page .svc-num{font-size:0.65rem}.naturis-page .service-points li{font-size:0.78rem;padding:0.5rem 0}}
+@media (max-width:480px){.naturis-page .service-card{padding:0.9rem;min-height:200px}.naturis-page .service-card h5{font-size:0.88rem}.naturis-page .service-points li{font-size:0.75rem}}
+.naturis-page .quality-section{background:var(--naturis-gradient);color:white;padding:80px 0}
+.naturis-page .quality-section .container-lg{display:grid;grid-template-columns:1.1fr 1.4fr;gap:3rem;align-items:start}
+.naturis-page .quality-kicker{display:block;font-size:0.72rem;letter-spacing:0.26em;text-transform:uppercase;color:rgba(255,255,255,0.72);margin-bottom:0.85rem;font-weight:700}
+.naturis-page .quality-title{font-family:'DM Serif Display',serif;font-size:clamp(2.2rem,4vw,3.8rem);line-height:0.98;color:white;margin-bottom:1.5rem}
+.naturis-page .quality-text{font-size:0.95rem;line-height:1.85;color:rgba(255,255,255,0.88);margin-bottom:2rem;max-width:540px}
+.standards-list{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:1.2rem}
+.standard-item{display:flex;align-items:flex-start;gap:1rem}
+.standard-icon{width:40px;height:40px;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.2);border-radius:6px;flex-shrink:0;margin-top:0.1rem}
+.standard-icon i{font-size:1.1rem;color:white}
+.standard-info h4{margin:0 0 0.25rem;font-size:0.95rem;font-weight:700;color:white}
+.standard-info p{margin:0;font-size:0.82rem;color:rgba(255,255,255,0.72);line-height:1.45}
+.quality-practices{display:grid;grid-template-columns:repeat(2,1fr);gap:1.2rem}
+.practice-box{background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.15);padding:1.25rem;border-radius:8px;backdrop-filter:blur(10px)}
+.practice-box p{margin:0;font-size:0.9rem;line-height:1.6;color:rgba(255,255,255,0.88)}
+@media (max-width:991px){.naturis-page .quality-section .container-lg{grid-template-columns:1fr;gap:2rem}.naturis-page .quality-practices{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:768px){.naturis-page .quality-section{padding:60px 0}.naturis-page .quality-title{font-size:2.2rem;margin-bottom:1.25rem}.naturis-page .quality-text{font-size:0.9rem;line-height:1.75;margin-bottom:1.5rem}.naturis-page .quality-practices{grid-template-columns:1fr;gap:1rem}.naturis-page .practice-box{padding:1rem}.naturis-page .practice-box p{font-size:0.85rem;line-height:1.5}.naturis-page .standards-list{gap:1rem}.naturis-page .standard-item{gap:0.85rem}.naturis-page .standard-icon{width:36px;height:36px}.naturis-page .standard-info h4{font-size:0.9rem}.naturis-page .standard-info p{font-size:0.76rem}}
+@media (max-width:640px){.naturis-page .quality-section{padding:50px 0}.naturis-page .quality-title{font-size:1.8rem}.naturis-page .quality-kicker{font-size:0.66rem}.naturis-page .quality-text{font-size:0.82rem;line-height:1.6;margin-bottom:1.25rem}.naturis-page .practice-box{padding:0.9rem;gap:0.5rem}.naturis-page .practice-box p{font-size:0.78rem}.naturis-page .standards-list{gap:0.85rem}.naturis-page .standard-icon{width:32px;height:32px}.naturis-page .standard-icon i{font-size:0.95rem}.naturis-page .standard-info h4{font-size:0.82rem;margin-bottom:0.2rem}.naturis-page .standard-info p{font-size:0.7rem;line-height:1.3}}
+@media (max-width:480px){.naturis-page .quality-section{padding:40px 0}.naturis-page .quality-section::before{display:none}}
+.naturis-page .team-section{background:var(--naturis-cream);padding:80px 0}
+.team-section .container-lg{max-width:1140px}
+.naturis-page .team-kicker{display:block;font-size:0.72rem;letter-spacing:0.26em;text-transform:uppercase;color:var(--naturis-sage);margin-bottom:0.85rem;font-weight:700}
+.naturis-page .team-title{font-family:'DM Serif Display',serif;font-size:clamp(2.2rem,4vw,3.8rem);line-height:0.98;color:var(--naturis-forest);margin-bottom:2.5rem}
+.naturis-page .team-section .container-lg{text-align:center}.team-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:2rem;margin-top:3rem;justify-items:stretch;max-width:1000px;margin-left:auto;margin-right:auto}
+.naturis-page .team-card{background:var(--naturis-white);border-radius:12px;padding:1.5rem 1.2rem;box-shadow:var(--shadow-sm);text-align:center;transition:all 0.3s;border-bottom:3px solid var(--naturis-lime);height:340px;display:flex;flex-direction:column;justify-content:center;align-items:center;width:100%;min-width:0}
+.team-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-md)}
+.naturis-page .team-avatar{width:60px;height:60px;background:var(--naturis-gradient);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 1.25rem;font-size:1.4rem;font-weight:700;color:white}
+.naturis-page .team-name{font-size:1.02rem;font-weight:700;color:var(--naturis-forest);margin:0 0 0.35rem}
+.naturis-page .team-role{font-size:0.82rem;color:var(--naturis-sage);letter-spacing:0.08em;text-transform:uppercase;margin:0 0 1rem;font-weight:600}
+.naturis-page .team-info{font-size:0.78rem;line-height:1.5;color:var(--naturis-ink);margin:0;overflow-wrap:anywhere;word-break:break-word}
+.naturis-page .team-experience{display:flex;align-items:center;justify-content:center;gap:0.35rem;margin-top:0.75rem;font-size:0.75rem;color:var(--naturis-sage);font-weight:600}
+@media (max-width:1200px){.naturis-page .team-grid{grid-template-columns:repeat(3,1fr)}}
+@media (max-width:991px){.naturis-page .team-grid{grid-template-columns:repeat(2,1fr)}.naturis-page .team-card{height:320px}}
+@media (max-width:768px){.naturis-page .team-section{padding:60px 0}.naturis-page .team-grid{grid-template-columns:1fr;max-width:340px}.naturis-page .team-title{font-size:2rem}.naturis-page .team-card{height:300px;padding:1.2rem 1rem}.naturis-page .team-name{font-size:0.9rem}.naturis-page .team-role{font-size:0.72rem}.naturis-page .team-info{font-size:0.7rem}}
+@media (max-width:640px){.naturis-page .team-section .container-lg{padding:0 1rem}.naturis-page .team-grid{gap:1rem}.naturis-page .team-card{height:280px;padding:1rem 0.85rem}.naturis-page .team-avatar{width:44px;height:44px;font-size:1rem;margin-bottom:0.7rem}.naturis-page .team-name{font-size:0.86rem;margin-bottom:0.15rem}.naturis-page .team-role{font-size:0.7rem;margin-bottom:0.55rem}.naturis-page .team-info{font-size:0.66rem;line-height:1.32}.naturis-page .team-experience{font-size:0.64rem}}
+@media (max-width:480px){.naturis-page .team-grid{max-width:100%;gap:0.75rem}.naturis-page .team-card{height:250px;padding:0.8rem 0.7rem}.naturis-page .team-avatar{width:40px;height:40px;font-size:0.9rem;margin-bottom:0.55rem}.naturis-page .team-name{font-size:0.82rem}.naturis-page .team-role{font-size:0.65rem}.naturis-page .team-info{font-size:0.62rem}}
+.naturis-page .client-section{background:var(--naturis-cream);padding:80px 0}
+.naturis-page .client-kicker{display:block;font-size:0.72rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--naturis-sage);margin-bottom:0.85rem;font-weight:700}
+.naturis-page .client-title{font-family:'DM Serif Display',serif;font-size:clamp(2.2rem,4vw,3.6rem);line-height:0.98;color:var(--naturis-forest);margin-bottom:1rem}
+.naturis-page .client-intro{max-width:640px;font-size:0.95rem;line-height:1.75;color:var(--naturis-ink);margin-bottom:2rem}
+.client-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0.85rem}
+.naturis-page .client-card{background:var(--naturis-sand);border-radius:8px;padding:1rem 1.1rem;display:flex;align-items:center;gap:0.85rem;border:1px solid rgba(26,61,43,0.12);min-height:72px;box-shadow:0 3px 10px rgba(26,61,43,0.08);transition:transform 0.2s ease, box-shadow 0.2s ease}
+.naturis-page .client-card:hover{transform:translateY(-2px);box-shadow:0 7px 18px rgba(26,61,43,0.13)}
+.naturis-page .client-icon{width:28px;height:28px;display:flex;align-items:center;justify-content:center;border-radius:6px;background:rgba(26,61,43,0.12);color:var(--naturis-forest);flex-shrink:0}
+.client-icon i{font-size:0.85rem}
+.naturis-page .client-label{font-size:0.88rem;line-height:1.35;color:var(--naturis-forest);font-weight:700;margin:0}
+@media (max-width:991px){.naturis-page .client-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:768px){.naturis-page .client-section{padding:60px 0}.naturis-page .client-title{font-size:2rem}.naturis-page .client-grid{grid-template-columns:1fr}.naturis-page .client-card{padding:0.9rem 1rem;min-height:64px}.naturis-page .client-label{font-size:0.82rem}.naturis-page .client-icon{width:24px;height:24px}}
+@media (max-width:640px){.naturis-page .client-grid{gap:0.6rem}.naturis-page .client-card{padding:0.8rem;min-height:60px}.naturis-page .client-label{font-size:0.78rem;line-height:1.3}.naturis-page .client-icon{width:22px;height:22px}.naturis-page .client-icon i{font-size:0.78rem}}
+.naturis-page .hse-section{background:var(--naturis-amber);padding:80px 0}
+.naturis-page .hse-section .container-lg{display:grid;grid-template-columns:1fr 1.55fr;gap:2.2rem;align-items:start}
+.naturis-page .hse-kicker{display:block;font-size:0.72rem;letter-spacing:0.22em;text-transform:uppercase;color:rgba(26,61,43,0.72);margin-bottom:0.85rem;font-weight:700}
+.naturis-page .hse-title{font-family:'DM Serif Display',serif;font-size:clamp(2rem,3.8vw,3.3rem);line-height:0.98;color:var(--naturis-forest);margin:0}
+.naturis-page .hse-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0.85rem}
+.naturis-page .hse-item{background:var(--naturis-lime);border:1px solid rgba(27,94,32,0.14);border-radius:8px;padding:1rem 1rem;display:flex;align-items:center;gap:0.7rem;min-height:62px;box-shadow:0 3px 10px rgba(26,61,43,0.09)}
+.naturis-page .hse-item svg,.naturis-page .hse-item i{font-size:0.95rem;color:var(--naturis-forest);flex-shrink:0}
+.naturis-page .hse-item span{font-size:0.88rem;line-height:1.35;color:var(--naturis-forest);font-weight:700}
+@media (max-width:991px){.naturis-page .hse-section .container-lg{grid-template-columns:1fr}.naturis-page .hse-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:768px){.naturis-page .hse-section{padding:60px 0}.naturis-page .hse-title{font-size:1.8rem}.naturis-page .hse-item{padding:0.9rem;min-height:56px}.naturis-page .hse-item span{font-size:0.82rem}}
+@media (max-width:640px){.naturis-page .hse-grid{grid-template-columns:1fr}.naturis-page .hse-item{padding:0.8rem;min-height:52px}.naturis-page .hse-item svg,.naturis-page .hse-item i{font-size:0.88rem}.naturis-page .hse-item span{font-size:0.78rem;line-height:1.3}}
+@media (max-width:480px){.naturis-page .hse-item{padding:0.7rem;min-height:48px}.naturis-page .hse-item span{font-size:0.75rem}}
+.naturis-page .contact-section{position:relative;background:var(--naturis-gradient);color:#fff;padding:90px 0 70px;overflow:hidden}
+.naturis-page .contact-section::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 10% 15%,rgba(255,255,255,0.06),transparent 35%),radial-gradient(circle at 88% 24%,rgba(184,217,160,0.1),transparent 38%);pointer-events:none}
+.contact-section .container-lg{position:relative;z-index:1}
+.contact-grid{display:grid;grid-template-columns:1.05fr 1fr;gap:2.4rem;align-items:start}
+.naturis-page .contact-kicker{display:flex;align-items:center;gap:0.6rem;font-size:0.68rem;letter-spacing:0.22em;text-transform:uppercase;color:rgba(255,255,255,0.62);margin-bottom:1rem;font-weight:700}
+.contact-kicker::before{content:'';width:34px;height:1px;background:rgba(255,255,255,0.32)}
+.naturis-page .contact-title{font-family:'DM Serif Display',serif;font-size:clamp(2.1rem,4vw,3.6rem);line-height:0.96;margin:0 0 1rem;color:#fff}
+.naturis-page .contact-intro{max-width:600px;color:rgba(255,255,255,0.82);font-size:0.96rem;line-height:1.75;margin-bottom:1.8rem}
+.naturis-page .contact-list{list-style:none;margin:0;padding:0;border-top:1px solid rgba(255,255,255,0.08)}
+.naturis-page .contact-list li{display:grid;grid-template-columns:20px 1fr;gap:0.95rem;padding:0.95rem 0;border-bottom:1px solid rgba(255,255,255,0.08)}
+.naturis-page .contact-list i{font-size:0.75rem;color:var(--naturis-lime);line-height:1.5;padding-top:0.15rem}
+.naturis-page .contact-item-label{display:block;font-size:0.63rem;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.56);margin-bottom:0.35rem;font-weight:700}
+.naturis-page .contact-item-text{margin:0;font-size:1rem;line-height:1.45;color:#fff;font-weight:600}
+.naturis-page .contact-panel{background:rgba(13,26,18,0.55);border:1px solid rgba(255,255,255,0.1);padding:2rem;border-radius:0;box-shadow:0 10px 24px rgba(0,0,0,0.22)}
+.naturis-page .parent-label{font-size:0.62rem;letter-spacing:0.22em;text-transform:uppercase;color:rgba(255,255,255,0.58);margin-bottom:0.95rem;font-weight:700}
+.naturis-page .parent-name{font-family:'DM Serif Display',serif;font-size:2.05rem;line-height:1.05;color:#fff;margin:0 0 0.85rem}
+.naturis-page .parent-desc{font-size:0.9rem;line-height:1.65;color:rgba(255,255,255,0.72);margin:0 0 1.6rem}
+.naturis-page .accredit-box{display:grid;grid-template-columns:auto 1fr;gap:1rem;align-items:center;background:rgba(61,107,83,0.18);border:1px solid rgba(184,217,160,0.14);border-left:3px solid var(--naturis-lime);padding:1rem 1.1rem}
+.naturis-page .accredit-year{font-family:'DM Serif Display',serif;font-size:2rem;line-height:1;color:#fff}
+.naturis-page .accredit-copy strong{display:block;font-size:0.95rem;line-height:1.2;color:#fff;margin-bottom:0.3rem}
+.naturis-page .accredit-copy span{display:block;font-size:0.82rem;line-height:1.35;color:rgba(255,255,255,0.74)}
+@media (max-width:991px){.contact-section{padding:70px 0 60px}.contact-grid{grid-template-columns:1fr;gap:1.8rem}.contact-panel{padding:1.5rem}.naturis-page .contact-intro{font-size:0.92rem}}
+@media (max-width:768px){.contact-section{padding:60px 0 50px}.naturis-page .contact-title{font-size:1.8rem}.naturis-page .contact-intro{font-size:0.88rem;margin-bottom:1.5rem}.naturis-page .contact-list li{padding:0.8rem 0;grid-template-columns:16px 1fr;gap:0.75rem}.naturis-page .contact-item-label{font-size:0.58rem;margin-bottom:0.25rem}.naturis-page .contact-item-text{font-size:0.95rem}.naturis-page .contact-panel{padding:1.25rem}.naturis-page .parent-name{font-size:1.65rem;margin-bottom:0.65rem}.naturis-page .parent-desc{font-size:0.85rem;margin-bottom:1.25rem}.naturis-page .accredit-year{font-size:1.6rem}.naturis-page .accredit-copy strong{font-size:0.88rem}.naturis-page .accredit-copy span{font-size:0.75rem}}
+@media (max-width:640px){.contact-section{padding:50px 0 40px}.naturis-page .contact-kicker{font-size:0.62rem}.naturis-page .contact-title{font-size:1.6rem}.naturis-page .contact-intro{font-size:0.82rem}.naturis-page .contact-list li{padding:0.7rem 0;gap:0.6rem}.naturis-page .contact-list i{font-size:0.7rem}.naturis-page .contact-item-label{font-size:0.54rem}.naturis-page .contact-item-text{font-size:0.9rem}.naturis-page .contact-panel{padding:1rem}.naturis-page .parent-label{font-size:0.56rem;margin-bottom:0.75rem}.naturis-page .parent-name{font-size:1.4rem;margin-bottom:0.5rem}.naturis-page .parent-desc{font-size:0.8rem;margin-bottom:1rem}.naturis-page .accredit-box{gap:0.8rem;padding:0.9rem}.naturis-page .accredit-year{font-size:1.4rem}.naturis-page .accredit-copy strong{font-size:0.82rem;margin-bottom:0.2rem}.naturis-page .accredit-copy span{font-size:0.72rem}}
+@media (max-width:480px){.contact-section{padding:40px 0 30px}.contact-section::before{display:none}.naturis-page .contact-intro{font-size:0.78rem}.naturis-page .contact-list{border-top:none}.naturis-page .contact-list li{padding:0.6rem 0;border-bottom:1px solid rgba(255,255,255,0.06)}.naturis-page .contact-panel{padding:0.9rem}.naturis-page .parent-name{font-size:1.25rem}.naturis-page .accredit-year{font-size:1.25rem}}
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="naturis-page">
+<!-- HERO -->
+<section class="lab-hero">
+  <div class="container-lg">
+    <div class="row align-items-center">
+      <div class="col-lg-7">
+        <div class="hero-kicker">A subsidiary of Goshen Giant Group Limited</div>
+        <h1>Analytical Laboratory <br><em>Services</em></h1>
+        <p class="hero-lead">High-quality, reliable, and timely laboratory services for industrial, regulatory, and public needs aligned with ISO/IEC 17025 standards.</p>
+        <p>
+          <a href="#contact" class="btn btn-primary me-2">Contact</a>
+          <a href="#services" class="btn btn-outline-light">Our Services</a>
+        </p>
+        <div class="hero-stats">
+          <div class="hero-stat">
+            <div class="hero-stat-value">2025</div>
+            <div class="hero-stat-label">Established</div>
+          </div>
+          <div class="hero-stat">
+            <div class="hero-stat-value">40+</div>
+            <div class="hero-stat-label">Tests Covered</div>
+          </div>
+          <div class="hero-stat">
+            <div class="hero-stat-value">4</div>
+            <div class="hero-stat-label">Core Areas</div>
+          </div>
+          <div class="hero-badge">ISO/IEC 17025</div>
+        </div>
+      </div>
+      <div class="col-lg-5 d-none d-lg-block"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="lab-section">
+  <div class="container-lg">
+    <div class="about-text reveal">
+      <div class="section-tag">Introduction</div>
+      <h2>Nigeria's Trusted Analytical Partner</h2>
+      <p>
+        Naturis Analytical Laboratory Services Limited is a professionally structured
+        analytical and environmental testing laboratory established to provide high-quality,
+        reliable, and timely laboratory services.
+      </p>
+      <div class="highlight">
+        "To become a leading accredited analytical laboratory in Nigeria and Africa,
+        recognized for excellence in environmental and food testing services."
+      </div>
+      <p>
+        Operating as the analytical and quality assurance arm of Goshen Giant Group Limited,
+        Naturis supports internal operations while offering independent third-party testing
+        and consultancy services to a wide range of clients.
+      </p>
+    </div>
+    <div class="about-visual reveal">
+      <div class="info-card">
+        <div class="info-row">
+          <span class="info-key">Company Name</span>
+          <span class="info-val">Naturis Analytical Laboratory Services Limited</span>
+        </div>
+        <div class="info-row">
+          <span class="info-key">Parent Company</span>
+          <span class="info-val">Goshen Giant Group Limited</span>
+        </div>
+        <div class="info-row">
+          <span class="info-key">RC Number</span>
+          <span class="info-val">8302809</span>
+        </div>
+        <div class="info-row">
+          <span class="info-key">Established</span>
+          <span class="info-val">27th February 2025</span>
+        </div>
+        <div class="info-row">
+          <span class="info-key">Address</span>
+          <span class="info-val">Plot 48, Itam Industrial Layout, Uyo, Akwa Ibom State</span>
+        </div>
+        <div class="info-row">
+          <span class="info-key">Standard</span>
+          <span class="info-val">ISO/IEC 17025 Aligned</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services" class="lab-section" style="background:white">
+  <div class="container-lg">
+    <h2 class="section-title">Scope of Services</h2>
+    <p class="services-intro">From environmental monitoring to food safety and industrial chemistry, Naturis delivers accurate, reproducible, and internationally compliant test results across four core domains.</p>
+    <div class="services-grid mt-4">
+      <div class="service-card">
+        <div class="svc-num">01</div>
+        <div class="svc-icon"><i class="bi bi-water"></i></div>
+        <h5>Environmental Testing</h5>
+        <ul class="service-points">
+          <li>Air quality analysis</li>
+          <li>Water &amp; wastewater analysis</li>
+          <li>Soil &amp; sediment testing</li>
+          <li>Effluent &amp; discharge monitoring</li>
+          <li>EIA support</li>
+        </ul>
+      </div>
+      <div class="service-card">
+        <div class="svc-num">02</div>
+        <div class="svc-icon"><i class="bi bi-cup-straw"></i></div>
+        <h5>Food &amp; Beverage Analysis</h5>
+        <ul class="service-points">
+          <li>Microbiological testing</li>
+          <li>Proximate analysis</li>
+          <li>Heavy metal analysis</li>
+          <li>Additives &amp; contaminants</li>
+          <li>Shelf-life &amp; stability testing</li>
+          <li>Vegetable Oil Analysis</li>
+        </ul>
+      </div>
+      <div class="service-card">
+        <div class="svc-num">03</div>
+        <div class="svc-icon" aria-hidden="true">
+          <svg class="icon-svg" viewBox="0 0 16 16" role="img" focusable="false" aria-hidden="true">
+            <path d="M5.5 2a.5.5 0 0 1 0-1h5a.5.5 0 0 1 0 1H10v3.646l3.854 5.781A1 1 0 0 1 13.021 13H2.98a1 1 0 0 1-.832-1.573L6 5.646V2zm3 4.5V2H7v4.5L3.5 12h9z"/>
+          </svg>
+        </div>
+        <h5>Industrial &amp; Chemical Analysis</h5>
+        <ul class="service-points">
+          <li>Raw material testing</li>
+          <li>Process control analysis</li>
+          <li>Chemical composition analysis</li>
+          <li>QA &amp; compliance testing</li>
+        </ul>
+      </div>
+      <div class="service-card">
+        <div class="svc-num">04</div>
+        <div class="svc-icon"><i class="bi bi-chat-dots"></i></div>
+        <h5>Consultancy Services</h5>
+        <ul class="service-points">
+          <li>Environmental compliance advisory</li>
+          <li>Laboratory setup &amp; validation</li>
+          <li>Regulatory documentation</li>
+          <li>QMS implementation</li>
+        </ul>
+      </div>
+      <div class="service-card">
+        <div class="svc-num">05</div>
+        <div class="svc-icon"><i class="bi bi-chat-dots"></i></div>
+        <h5>Cosmetics Analysis</h5>
+        <ul class="service-points">
+          <li>Soap Analysis</li>
+          <li>Body Cream Analysis</li>
+          <li>Hair Cream Analysis</li>
+          <li>Shea Butter Analysis</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- QUALITY STANDARDS -->
+<section id="quality" class="quality-section">
+  <div class="container-lg">
+    <div>
+      <span class="quality-kicker">Standards &amp; Compliance</span>
+      <h2 class="quality-title">Built on Rigorous Quality</h2>
+      <p class="quality-text">
+        Naturis operates a structured Quality Management System aligned with international and national standards, ensuring every result delivered is accurate, traceable, and defensible.
+      </p>
+      <ul class="standards-list">
+        <li class="standard-item">
+          <div class="standard-icon"><i class="bi bi-shield-check"></i></div>
+          <div class="standard-info">
+            <h4>ISO/IEC 17025</h4>
+            <p>General Requirement for the Competence of Testing Laboratories</p>
+          </div>
+        </li>
+        <li class="standard-item">
+          <div class="standard-icon" aria-hidden="true">
+            <svg class="icon-svg" viewBox="0 0 16 16" role="img" focusable="false" aria-hidden="true">
+              <path d="M8 1C4 1 1 4.134 1 8.2 1 11.97 3.53 15 7.2 15c4.2 0 7.8-3.6 7.8-7.8C15 3.53 11.97 1 8.2 1zm-.7 9.7c-1.4 0-2.5-1.1-2.5-2.5S5.9 5.7 7.3 5.7c.9 0 1.7.5 2.1 1.2.6-.6 1.4-1 2.3-1 .3 0 .6 0 .9.1-.3 2.7-2.6 4.7-5.3 4.7z"/>
+            </svg>
+          </div>
+          <div class="standard-info">
+            <h4>FMENV &amp; NESREA</h4>
+            <p>Federal Ministry of Environment and National Environmental Standards Agency</p>
+          </div>
+        </li>
+        <li class="standard-item">
+          <div class="standard-icon"><i class="bi bi-check-circle"></i></div>
+          <div class="standard-info">
+            <h4>NAFDAC &amp; SON</h4>
+            <p>Food, Drug Administration, and Standards Organisation of Nigeria</p>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <div class="quality-practices">
+      <div class="practice-box">
+        <p><strong>Documented Standard Operating Procedures (SOPs)</strong></p>
+      </div>
+      <div class="practice-box">
+        <p><strong>Equipment calibration and validation schedules</strong></p>
+      </div>
+      <div class="practice-box">
+        <p><strong>Internal quality control &amp; proficiency testing</strong></p>
+      </div>
+      <div class="practice-box">
+        <p><strong>Full data integrity and traceability systems</strong></p>
+      </div>
+      <div class="practice-box">
+        <p><strong>Continuous staff training &amp; competence development</strong></p>
+      </div>
+      <div class="practice-box">
+        <p><strong>Daily verification checks on critical instruments</strong></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TECHNICAL TEAM -->
+<section id="team" class="team-section">
+  <div class="container-lg">
+    <span class="team-kicker">Our People</span>
+    <h2 class="team-title">Technical Team</h2>
+    <div class="team-grid">
+      <div class="team-card">
+        <div class="team-avatar">OA</div>
+        <p class="team-name">Olubusayo Aramide</p>
+        <p class="team-role">Laboratory QA Manager</p>
+        <p class="team-info">B.Tech Industrial Chemistry M.Sc. Environmental Chemistry, MIPAN, MICCON</p>
+        <div class="team-experience"><i class="bi bi-clock-history"></i>15 Years Experience</div>
+      </div>
+      <div class="team-card">
+        <div class="team-avatar">BU</div>
+        <p class="team-name">Blessing Ekpenyong</p>
+        <p class="team-role">Microbiologist</p>
+        <p class="team-info">B.Sc. Microbiology</p>
+        <div class="team-experience"><i class="bi bi-clock-history"></i>5 Years Experience</div>
+      </div>
+      <div class="team-card">
+        <div class="team-avatar">KI</div>
+        <p class="team-name">Kingsley Itseore</p>
+        <p class="team-role">Chemical Analyst</p>
+        <p class="team-info">B.Sc. Chemistry</p>
+        <div class="team-experience"><i class="bi bi-clock-history"></i>2 Years Experience</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CLIENT BASE -->
+<section id="client-base" class="client-section">
+  <div class="container-lg">
+    <span class="client-kicker">Who We Serve</span>
+    <h2 class="client-title">Client Base</h2>
+    <p class="client-intro">Naturis serves diverse sectors that require rigorous, standards-compliant analytical testing across Nigeria.</p>
+    <div class="client-grid">
+      <div class="client-card">
+        <div class="client-icon"><i class="bi bi-building"></i></div>
+        <p class="client-label">Manufacturing &amp; Processing Industries</p>
+      </div>
+      <div class="client-card">
+        <div class="client-icon"><i class="bi bi-fuel-pump"></i></div>
+        <p class="client-label">Oil &amp; Gas Companies</p>
+      </div>
+      <div class="client-card">
+        <div class="client-icon"><i class="bi bi-signpost-2"></i></div>
+        <p class="client-label">Environmental Consultants</p>
+      </div>
+      <div class="client-card">
+        <div class="client-icon"><i class="bi bi-bank"></i></div>
+        <p class="client-label">Government Agencies</p>
+      </div>
+      <div class="client-card">
+        <div class="client-icon"><i class="bi bi-flower1"></i></div>
+        <p class="client-label">Agricultural &amp; Food Processing Businesses</p>
+      </div>
+      <div class="client-card">
+        <div class="client-icon"><i class="bi bi-mortarboard"></i></div>
+        <p class="client-label">Universities &amp; Research Institutes</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HEALTH, SAFETY & ENVIRONMENT -->
+<section id="hse" class="hse-section">
+  <div class="container-lg">
+    <div>
+      <span class="hse-kicker">Safety First</span>
+      <h2 class="hse-title">Health, Safety &amp; Environment</h2>
+    </div>
+    <div class="hse-grid">
+      <div class="hse-item"><i class="bi bi-shield-check"></i><span>Personal Protective Equipment (PPE) protocols</span></div>
+      <div class="hse-item">
+        <svg class="icon-svg" viewBox="0 0 16 16" role="img" focusable="false" aria-hidden="true">
+          <path d="M5.5 2a.5.5 0 0 1 0-1h5a.5.5 0 0 1 0 1H10v3.646l3.854 5.781A1 1 0 0 1 13.021 13H2.98a1 1 0 0 1-.832-1.573L6 5.646V2zm3 4.5V2H7v4.5L3.5 12h9z"/>
+        </svg>
+        <span>Chemical handling &amp; storage protocols</span>
+      </div>
+      <div class="hse-item"><i class="bi bi-exclamation-octagon"></i><span>Emergency response procedures</span></div>
+      <div class="hse-item"><i class="bi bi-fire"></i><span>Fire safety &amp; spill control systems</span></div>
+      <div class="hse-item"><i class="bi bi-recycle"></i><span>Waste segregation &amp; compliant disposal</span></div>
+      <div class="hse-item"><i class="bi bi-eye"></i><span>Eye wash &amp; emergency shower stations</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="contact-section">
+  <div class="container-lg">
+    <div class="contact-grid">
+      <div>
+        <span class="contact-kicker">Get In Touch</span>
+        <h2 class="contact-title">Contact Us</h2>
+        <p class="contact-intro">Ready to submit samples, request a quote, or learn more about our analytical capabilities? Our team is ready to support your compliance and quality needs.</p>
+        <ul class="contact-list">
+          <li>
+            <i class="bi bi-geo-alt-fill"></i>
+            <div>
+              <span class="contact-item-label">Address</span>
+              <p class="contact-item-text">Plot 48, Itam Industrial Layout, Uyo<br>Uyo Capital Development Area, Akwa Ibom State</p>
+            </div>
+          </li>
+          <li>
+            <i class="bi bi-telephone-fill"></i>
+            <div>
+              <span class="contact-item-label">Phone</span>
+              <p class="contact-item-text">+234 705 702 5093</p>
+            </div>
+          </li>
+          <li>
+            <i class="bi bi-envelope-fill"></i>
+            <div>
+              <span class="contact-item-label">Email</span>
+              <p class="contact-item-text">inquiry@goshengiantgroup.com</p>
+              <p class="contact-item-text">busayoaramide@naturislaboratory.com</p>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <div class="contact-panel">
+        <div class="parent-box">
+          <div class="parent-label">Parent Organisation</div>
+          <h4 class="parent-name">Goshen Giant Group Limited</h4>
+          <p class="parent-desc">Naturis Analytical Laboratory Services Limited operates as a subsidiary of Goshen Giant Group Limited, serving as the group's analytical and quality assurance arm.</p>
+          <div class="accredit-box">
+            <div class="accredit-year">17025</div>
+            <div class="accredit-copy">
+              <strong>ISO/IEC Aligned</strong>
+              <span>Pursuing full accreditation for recognition of testing competence</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}
+ </div>

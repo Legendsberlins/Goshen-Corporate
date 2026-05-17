@@ -3,79 +3,50 @@ from django.views.decorators.http import require_http_methods
 from django.contrib import messages
 from django.conf import settings
 from django.urls import reverse
+from django.core.mail import EmailMessage
 import logging
-import json
-import base64
-from urllib import request as urllib_request
-from urllib.error import HTTPError, URLError
 from threading import Thread
+from typing import Optional
 from .models import Job, Company, GeneralApplication, ContactMessage
 
 logger = logging.getLogger(__name__)
 
 
-def _send_sendgrid_email(
+def _send_brevo_email(
     *,
     subject: str,
     body: str,
     to_email: str,
-    reply_to: str | None = None,
-    attachments: list[dict] | None = None,
+    reply_to: Optional[str] = None,
+    attachments: Optional[list[dict]] = None,
 ) -> None:
-    """Send an email via SendGrid Web API over HTTPS."""
-    api_key = getattr(settings, 'SENDGRID_API_KEY', '') or settings.EMAIL_HOST_PASSWORD
-    if not api_key:
-        raise RuntimeError('SendGrid API key is not configured.')
-
-    payload = {
-        'personalizations': [
-            {
-                'to': [{'email': to_email}],
-            }
-        ],
-        'from': {'email': settings.DEFAULT_FROM_EMAIL},
-        'subject': subject,
-        'content': [
-            {
-                'type': 'text/plain',
-                'value': body,
-            }
-        ],
-    }
-
-    if reply_to:
-        payload['reply_to'] = {'email': reply_to}
-
-    if attachments:
-        payload['attachments'] = attachments
-
-    req = urllib_request.Request(
-        url='https://api.sendgrid.com/v3/mail/send',
-        data=json.dumps(payload).encode('utf-8'),
-        headers={
-            'Authorization': f'Bearer {api_key}',
-            'Content-Type': 'application/json',
-        },
-        method='POST',
-    )
-
-    timeout = int(getattr(settings, 'SENDGRID_API_TIMEOUT', 15))
+    """Send an email via Brevo using Django's SMTP backend."""
     try:
-        with urllib_request.urlopen(req, timeout=timeout) as resp:
-            status = resp.getcode()
-            if status not in (200, 202):
-                raise RuntimeError(f'SendGrid API returned unexpected status: {status}')
-    except HTTPError as e:
-        detail = e.read().decode('utf-8', errors='ignore') if hasattr(e, 'read') else str(e)
-        raise RuntimeError(f'SendGrid API HTTPError {e.code}: {detail}') from e
-    except URLError as e:
-        raise RuntimeError(f'SendGrid API network error: {e.reason}') from e
+        email = EmailMessage(
+            subject=subject,
+            body=body,
+            from_email=settings.DEFAULT_FROM_EMAIL,
+            to=[to_email],
+            reply_to=[reply_to] if reply_to else None,
+        )
+
+        if attachments:
+            for attachment in attachments:
+                email.attach(
+                    attachment.get('filename', 'attachment'),
+                    attachment.get('content', b''),
+                    attachment.get('type', 'application/octet-stream'),
+                )
+
+        email.send()
+    except Exception as e:
+        raise RuntimeError(f'Brevo email send failed: {str(e)}') from e
 
 
 def _send_contact_email(name: str, email: str, subject: str, message: str) -> None:
     """Send contact email in background to avoid blocking HTTP response."""
     try:
-        _send_sendgrid_email(
+        _send_brevo_email(
             subject=subject or f'Contact inquiry from {name}',
             body=(
                 f'Name: {name}\n'
@@ -225,17 +196,16 @@ def general_application(request):
         )
 
         try:
-            _send_sendgrid_email(
+            _send_brevo_email(
                 subject=subject,
                 body=body,
                 to_email=settings.GENERAL_APPLICATION_RECIPIENT,
                 reply_to=email if email else None,
                 attachments=[
                     {
-                        'content': base64.b64encode(resume_bytes).decode('utf-8'),
+                        'content': resume_bytes,
                         'type': resume_file.content_type or 'application/octet-stream',
                         'filename': resume_file.name,
-                        'disposition': 'attachment',
                     }
                 ],
             )

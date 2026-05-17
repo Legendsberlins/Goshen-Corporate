@@ -20,6 +20,7 @@ from jobs import views as jobs_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    # Goshen Corporate (Jobs/Careers)
     path('', jobs_views.careers, name='home'),
     path('about/', jobs_views.about, name='about'),
     path('contact/', jobs_views.contact, name='contact'),
@@ -27,4 +28,7 @@ urlpatterns = [
     path('careers/jobs/<int:pk>/', jobs_views.job_detail, name='job_detail'),
     path('careers/apply/general/', jobs_views.general_application, name='general_application'),
     path('careers/jobs/<int:pk>/apply/', jobs_views.job_application, name='job_application'),
+    
+    # Goshen Laboratory (accessible at /naturis-analytical-lab/)
+    path('naturis-analytical-lab/', include('lab.urls', namespace='lab')),
 ]
