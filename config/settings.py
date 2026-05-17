@@ -84,6 +84,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'core',
     'jobs',
+    'lab.apps.LabConfig',
 ]
 
 MIDDLEWARE = [
@@ -133,6 +134,38 @@ DATABASES = {
         },
     }
 }
+# Allow a single DATABASE_URL (useful for DO Managed Databases / Render-style URLs)
+DATABASE_URL = os.getenv('DATABASE_URL', '').strip()
+if DATABASE_URL:
+    try:
+        import dj_database_url
+
+        DATABASES = {
+            'default': dj_database_url.parse(DATABASE_URL, conn_max_age=600),
+        }
+    except Exception:
+        parsed = urlparse(DATABASE_URL)
+        DATABASES = {
+            'default': {
+                'ENGINE': 'django.db.backends.postgresql',
+                'NAME': parsed.path.lstrip('/') if parsed.path else os.getenv('DB_NAME', 'goshen_corporate'),
+                'USER': parsed.username or os.getenv('DB_USER', 'postgres'),
+                'PASSWORD': parsed.password or os.getenv('DB_PASSWORD', ''),
+                'HOST': parsed.hostname or os.getenv('DB_HOST', '127.0.0.1'),
+                'PORT': parsed.port or os.getenv('DB_PORT', '5432'),
+            }
+        }
+# Development fallback: when DEBUG is enabled prefer a local sqlite database
+# unless explicitly disabled via the USE_LOCAL_SQLITE env var. This avoids
+# attempting to connect to remote production hosts (e.g. render.com) during
+# local development.
+if DEBUG and os.getenv('USE_LOCAL_SQLITE', 'true').lower() in {'1', 'true', 'yes', 'on'}:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
+    }
 
 
 # Password validation
@@ -185,6 +218,28 @@ STORAGES = {
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
+# DigitalOcean Spaces (S3-compatible) configuration
+USE_SPACES = os.getenv('USE_SPACES', 'false').lower() in {'1', 'true', 'yes', 'on'}
+if USE_SPACES:
+    DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+    STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+
+    AWS_ACCESS_KEY_ID = os.getenv('DO_SPACES_KEY', os.getenv('AWS_ACCESS_KEY_ID', ''))
+    AWS_SECRET_ACCESS_KEY = os.getenv('DO_SPACES_SECRET', os.getenv('AWS_SECRET_ACCESS_KEY', ''))
+    AWS_STORAGE_BUCKET_NAME = os.getenv('DO_SPACES_BUCKET', '')
+    AWS_S3_REGION_NAME = os.getenv('DO_SPACES_REGION', '')
+    AWS_S3_ENDPOINT_URL = os.getenv('DO_SPACES_ENDPOINT', '')
+    AWS_S3_CUSTOM_DOMAIN = os.getenv('DO_SPACES_CUSTOM_DOMAIN') or (f"{AWS_STORAGE_BUCKET_NAME}.{AWS_S3_REGION_NAME}.digitaloceanspaces.com" if AWS_STORAGE_BUCKET_NAME and AWS_S3_REGION_NAME else '')
+    AWS_DEFAULT_ACL = None
+    AWS_QUERYSTRING_AUTH = False
+    # URL overrides
+    if AWS_S3_CUSTOM_DOMAIN:
+        STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/static/'
+        MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/media/'
+
+# Respect X-Forwarded-Proto for request.is_secure() behind proxies/load-balancers
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
@@ -192,13 +247,12 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Email routing for form submissions
 EMAIL_BACKEND = os.getenv('EMAIL_BACKEND', 'django.core.mail.backends.smtp.EmailBackend')
-EMAIL_HOST = os.getenv('EMAIL_HOST', 'smtp.sendgrid.net')
+EMAIL_HOST = os.getenv('EMAIL_HOST', 'smtp-relay.brevo.com')
 EMAIL_PORT = int(os.getenv('EMAIL_PORT', '587'))
 EMAIL_USE_TLS = os.getenv('EMAIL_USE_TLS', 'True').lower() in {'1', 'true', 'yes', 'on'}
-EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER', 'apikey')
+EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER', '')
 EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD', '')
-SENDGRID_API_KEY = os.getenv('SENDGRID_API_KEY', EMAIL_HOST_PASSWORD)
-SENDGRID_API_TIMEOUT = int(os.getenv('SENDGRID_API_TIMEOUT', '15'))
+
 
 # JOIN widget integration
 JOIN_WIDGET_EMBED_CODE = os.getenv('JOIN_WIDGET_EMBED_CODE', '')

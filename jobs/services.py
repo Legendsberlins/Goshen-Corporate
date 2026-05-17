@@ -5,6 +5,7 @@ import json
 import logging
 import re
 from typing import Any
+from typing import Optional
 from urllib import parse as urllib_parse
 from urllib import request as urllib_request
 from urllib.error import HTTPError, URLError
@@ -43,7 +44,7 @@ def _extract_items(payload: Any) -> list[dict[str, Any]]:
     return []
 
 
-def _request_json(url: str, *, params: dict[str, Any] | None = None) -> Any:
+def _request_json(url: str, *, params: Optional[dict[str, Any]] = None) -> Any:
     query_string = urllib_parse.urlencode(params or {})
     request_url = f'{url}?{query_string}' if query_string else url
 
